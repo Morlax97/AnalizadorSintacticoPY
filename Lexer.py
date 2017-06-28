@@ -1,94 +1,99 @@
-cadena="((set (x 1)) (if (x<=10) (pepe=true)"
+#string="insertar string de prueba acá"
 
 
-cadena+=" "
+string+=" "
 i=0
-j=0
-aux=""
+k=0
+pretoken=""
 tokens=[]
-cParentesis=0
+cIgualParentesis=0
 
 while True:
-	if i<len(cadena):
-		if cadena[i]=='"':
+	if i<len(string):
+		if string[i]=='"':
 			#Armando el auxiliar con cada token
-			while cadena[i+j]!='"':
-				if i+j==len(cadena):
-					print("ERROR 0")
+			while string[i+k]!='"':
+				if i+k==len(string):
+					print("ERROR: FALTA CERRAR EL STRING")
 					break
-				aux+=cadena[i+j]
-				j+=1
-			if cadena[i+j+1] not in [" ", "(", ")", "="]:
-				print("ERROR 1")
+				pretoken+=string[i+k]
+				k+=1
+			if string[i+k+1] not in [" ", "(", ")", "="]:
+				print("ERROR: CARACTERES LUEGO DEL STRING")
+				#Por ejemplo "asdasd"as ^
 				break
 			else:
-				tokens.append("<CADENA>")
+				tokens.append("<STRING>")
 		#Chequeo de palabra/s
-		elif cadena[i].isalpha():
-			while cadena[i+j].isalpha():
-				aux+=cadena[i+j]
-				j+=1
-			if cadena[i+j] not in [" ", "(", ")", "=", ">", "<"]:
-				print("ERROR 2")
+		elif string[i].isalpha():
+			while string[i+k].isalpha():
+				pretoken+=string[i+k]
+				k+=1
+			if string[i+k] not in [" ", "(", ")", "=", ">", "<"]:
+				print("ERROR: COMBINACIÓN DE ALFANUMÉRICOS")
 				break
 			else:
 				#Palabras Reservadas
-				if aux in ["and", "or", "not"]:
+				if pretoken in ["and", "or", "not"]:
 					tokens.append("<OPLOG>")
-				elif aux in ["true", "false"]:
+				elif pretoken in ["true", "false"]:
 					tokens.append("<BOOL>")
-				elif aux=="define":
+				elif pretoken=="define":
 					tokens.append("<DEFINE>")
-				elif aux=="if":
+				elif pretoken=="if":
 					tokens.append("<IF>")
-				elif aux=="set":
+				elif pretoken=="set":
 					tokens.append("<SET>")
 				#Identificador
 				else:
 					tokens.append("<ID>")
 		#Chequeo de números	
-		elif cadena[i].isdigit():
-			while cadena[i+j].isdigit():
-				aux+=cadena[i+j]
-				j+=1
-			if cadena[i+j] not in [" ", "(", ")", "=", ">", "<", "+", "*", "^"]:
-				print("ERROR 3")
+		elif string[i].isdigit():
+			while string[i+k].isdigit():
+				pretoken+=string[i+k]
+				k+=1
+			if string[i+k] not in [" ", "(", ")", "=", ">", "<", "+", "*", "^"]:
+				print("ERROR: COMBINACIÓN DE ALFANUMÉRICOS")
 				break
 			else:
 				tokens.append("<NUM>")
 		#Operadores de Relación
-		elif cadena[i] in ["<", ">", "="]:
-			if cadena[i+1]=="=":
-				j=2
+		elif string[i] in ["<", ">", "="]:
+			if string[i+1]=="=":
+				k=2
 			else:
-				j=1
+				k=1
 			tokens.append("<OPREL>")
 		#Operadores Matemáticos
-		elif cadena[i] in ["+", "*", "^"]:
-			j=1
+		elif string[i] in ["+", "*", "^"]:
+			k=1
 			tokens.append("<OPMAT>")
 		#Paréntesis abierto
-		elif cadena[i]=="(":
-			j=1
-			cParentesis+=1
+		elif string[i]=="(":
+			k=1
+			cIgualParentesis+=1
 			tokens.append("<(>")
 		#Paréntesis cerrado con chequeo
-		elif cadena[i]==")":
-			if cParentesis<1:
-				print("ERROR 4")
+		elif string[i]==")":
+			if cIgualParentesis<1:
+				print("ERROR: DISCREPANCIA ENTRE PARÉNTESIS ABIERTOS Y CERRADOS")
 				break
 			else:
-				j=1
-				cParentesis-=1
+				k=1
+				cIgualParentesis-=1
 				tokens.append("<)>")
 			
+		elif string[i]!=" ":
+			print("ERROR: CARACTERES NO RECONOCIDOS POR EL LENGUAJE")
+			break
 		else:
-			j=1
+			k=1
 
-		i+=j
-		j=0
-		aux=""
+		i+=k
+		k=0
+		pretoken=""
 
 	else:
 		print(tokens)
 		break
+
