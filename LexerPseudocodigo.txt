@@ -1,83 +1,83 @@
 
-Asignar cadena+=" "
+Asignar string+=" "
 Asignar 0 a i
-Asignar 0 a j
-Asignar " " a aux
+Asignar 0 a k
+Asignar " " a pretoken
 Asignar tokens=[]
-Asignar 0 a cparentesis
+Asignar 0 a cIgualParentesis
 
 Mientras verdadero hacer:
-  Si i menor a largo de la cadena entonces
-    Si cadena en i es '""' entonces
+  Si i menor a largo de string entonces
+    Si string en i es '""' entonces
       Mientras .
-        si i+j es igual a largo de la cadena entonces
-          Imprimir "ERROR 0"
+        si i+k es igual a largo de string entonces
+          Imprimir "ERROR: FALTA CERRAR EL STRING"
           Salir del ciclo
-        Asignar aux+ = cadena en i+j
-        Sumar 1 a j
-      Si cadena en i+j+1 no es " ", "(", ")", o "=" entonces
+        Asignar pretoken+ = string en i+k
+        Sumar 1 a k
+      Si string en i+k+1 no es " ", "(", ")", o "=" entonces
         Imprimir "ERROR 1"
         Salir del ciclo
       Sino
-        Agregar "<CADENA>" a tokens
-    Sino si cadena en i es alfa entonces
-      Mientras cadena en i+j sea alfa hacer
-        Asignar aux+ = cadena en i+j
-        Sumar 1 a j
-      Si cadena en i+j no es " ", "(", ")", "=", "<", o ">" entonces
-        Imprimir "ERROR 2"
+        Agregar "<STRING>" a tokens
+    Sino si string en i es alfa entonces
+      Mientras string en i+k sea alfa hacer
+        Asignar pretoken+ = string en i+k
+        Sumar 1 a k
+      Si string en i+k no es " ", "(", ")", "=", "<", o ">" entonces
+        Imprimir "ERROR: COMBINACIÓN DE ALFANUMÉRICOS"
         Salir del ciclo
       Sino
-        Si aux es "and", "or", o "not" entonces
+        Si pretoken es "and", "or", o "not" entonces
           Agregar "<OPLOG>" a tokens
-        Sino si aux es "true", o "false" entonces
+        Sino si pretoken es "true", o "false" entonces
           Agregar "<BOOL>" a tokens
-        Sino si aux es "define" entonces
+        Sino si pretoken es "define" entonces
           Agregar "<DEFINE>" a tokens
-        Sino si aux es "if" entonces
+        Sino si pretoken es "if" entonces
           Agregar "<IF>" a tokens
-        Sino si aux es "set" entonces
+        Sino si pretoken es "set" entonces
           Agregar "<SET>" a tokens
         Sino agregar "<ID>" a tokens
       
-    Sino si cadena en i es digito entonces
-      Mientras cadena en i+j sea digito hacer
-        aux+ = cadena en i+j
-        Sumar 1 a j
-      Si cadena en i+j no es  " ", "(", ")", "=", "<", ">", "+", "*", o "^" entonces
-        Imprimir "ERROR 3"
+    Sino si string en i es digito entonces
+      Mientras string en i+k sea digito hacer
+        pretoken+ = string en i+k
+        Sumar 1 a k
+      Si string en i+k no es  " ", "(", ")", "=", "<", ">", "+", "*", o "^" entonces
+        Imprimir "ERROR: COMBINACIÓN DE ALFANUMÉRICOS"
         Salir del ciclo
       Sino agregar "<NUM>" a tokens
     
-    Sino si cadena en i es "<", ">" o "=" entonces
-      Si cadena en i+1 es "=" entonces
-        Asignar 2 a j
+    Sino si string en i es "<", ">" o "=" entonces
+      Si string en i+1 es "=" entonces
+        Asignar 2 a k
       Sino
-        Asignar 1 a j
+        Asignar 1 a k
       Agregar "<OPREL>" a tokens
    
-    Sino si cadena en i es "+", "*", o "^" entonces
-      Asignar 1 a j
+    Sino si string en i es "+", "*", o "^" entonces
+      Asignar 1 a k
       Agregar "<OPMAT>" a tokens
    
-    Sino si la cadena en i es "(" entonces
-      Asignar 1 a j
-      Sumar 1 a cParentesis
+    Sino si string en i es "(" entonces
+      Asignar 1 a k
+      Sumar 1 a cIgualParentesis
       Agregar "<(>" a tokens
     
-    Sino si la cadena en i es ")" entonces
-      Si cParentesis es menor a 1 entonces
-       Imprimir "ERROR 4"
+    Sino si string en i es ")" entonces
+      Si cIgualParentesis es menor a 1 entonces
+       Imprimir "ERROR: DISCREPANCIA ENTRE PARÉNTESIS ABIERTOS Y CERRADOS"
        Salir del ciclo
       Sino
-        Asignar 1 a j
-        Restar 1 a cParentesis
+        Asignar 1 a k
+        Restar 1 a cIgualParentesis
         Agregar "<)>" a tokens
       
-    Sino asignar 1 a j
-    Sumar j a i
-    Asignar 0 a j
-    Asignar "" a aux
+    Sino asignar 1 a k
+    Sumar k a i
+    Asignar 0 a k
+    Asignar "" a pretoken
   Sino
     Imprimir tokens
     Salir del ciclo
