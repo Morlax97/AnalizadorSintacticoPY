@@ -1,5 +1,5 @@
 
-Asignar string+=" "
+Agregar " " a string
 Asignar 0 a i
 Asignar 0 a k
 Asignar " " a pretoken
@@ -13,7 +13,7 @@ Mientras verdadero hacer:
         si i+k es igual a largo de string entonces
           Imprimir "ERROR: FALTA CERRAR EL STRING"
           Salir del ciclo
-        Asignar pretoken+ = string en i+k
+        Agregar string en i+k a pretoken
         Sumar 1 a k
       Si string en i+k+1 no es " ", "(", ")", o "=" entonces
         Imprimir "ERROR 1"
@@ -22,7 +22,7 @@ Mientras verdadero hacer:
         Agregar "<STRING>" a tokens
     Sino si string en i es alfa entonces
       Mientras string en i+k sea alfa hacer
-        Asignar pretoken+ = string en i+k
+        Agregar string en i+k a pretoken
         Sumar 1 a k
       Si string en i+k no es " ", "(", ")", "=", "<", o ">" entonces
         Imprimir "ERROR: COMBINACIÓN DE ALFANUMÉRICOS"
@@ -42,7 +42,7 @@ Mientras verdadero hacer:
       
     Sino si string en i es digito entonces
       Mientras string en i+k sea digito hacer
-        pretoken+ = string en i+k
+        Agregar string en i+k a pretoken
         Sumar 1 a k
       Si string en i+k no es  " ", "(", ")", "=", "<", ">", "+", "*", o "^" entonces
         Imprimir "ERROR: COMBINACIÓN DE ALFANUMÉRICOS"
