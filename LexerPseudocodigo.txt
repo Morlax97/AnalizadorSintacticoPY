@@ -16,7 +16,7 @@ Mientras verdadero hacer:
         Agregar string en i+k a pretoken
         Sumar 1 a k
       Si string en i+k+1 no es " ", "(", ")", o "=" entonces
-        Imprimir "ERROR 1"
+        Imprimir "ERROR: CARACTERES LUEGO DEL STRING"
         Salir del ciclo
       Sino
         Agregar "<STRING>" a tokens
