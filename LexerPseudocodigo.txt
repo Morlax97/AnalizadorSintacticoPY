@@ -13,7 +13,7 @@ Definir funcion lexer con string de entrada
                                     Salir del ciclo
                               Agregar string en i+k a pretoken
                               Sumar 1 a k
-                        Si i+k+1 es igual a largo del string entonces
+                        Si i+k+1 es igual a largo de string entonces
                               Agregar la tupla ("<STRING>", pretoken) a tokens
                         Sino si string en i+k+1 no es igual a " " o ")" entonces
                               Imprimir "ERROR: CARACTERES LUEGO DEL STRING"
@@ -24,7 +24,7 @@ Definir funcion lexer con string de entrada
                         Mientras string en i+k sea alfa hacer
                               Agregar string en i+k a pretoken
                               Sumar 1 a k
-                              Si i+k es igual a largo del string entonces
+                              Si i+k es igual a largo de string entonces
                                     Agregar la tupla ("<ID>", pretoken) a tokens
                          Si string en i+k no es " ", o ")" entonces
                               Imprimir "ERROR: COMBINACIÓN DE ALFANUMÉRICOS"
