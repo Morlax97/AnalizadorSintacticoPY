@@ -1,85 +1,91 @@
+Definir funcion lexer con string de entrada
+      Agregar " " a string
+      Asignar 0 a i
+      Asignar 0 a k
+      Asignar " " a pretoken
+      Asignar tokens=[]
+      Mientras verdadero hacer:
+            Si i menor a largo de string entonces
+                  Si string en i es '""' entonces
+                        Mientras string en i+k sea distinto a '""' hacer
+                              si i+k es igual a largo de string entonces
+                                    Imprimir "ERROR: FALTA CERRAR EL STRING"
+                                    Salir del ciclo
+                              Agregar string en i+k a pretoken
+                              Sumar 1 a k
+                        Si i+k+1 es igual a largo del string entonces
+                              Agregar la tupla ("<STRING>", pretoken) a tokens
+                        Sino si string en i+k+1 no es igual a " " o ")" entonces
+                              Imprimir "ERROR: CARACTERES LUEGO DEL STRING"
+                              Salir del ciclo
+                        Sino 
+                              Agregar la tupla ("<STRING>", pretoken) a tokens
+                  Sino si string en i es alfa entonces
+                        Mientras string en i+k sea alfa hacer
+                              Agregar string en i+k a pretoken
+                              Sumar 1 a k
+                              Si i+k es igual a largo del string entonces
+                                    Agregar la tupla ("<ID>", pretoken) a tokens
+                         Si string en i+k no es " ", o ")" entonces
+                              Imprimir "ERROR: COMBINACIÓN DE ALFANUMÉRICOS"
+                              Salir del ciclo
+                         Si pretoken es "or" o "not" hacer
+                              Agregar la tupla ("<OPLOG>", pretoken) a tokens
+                         Sino si pretoken es "true", o "false" entonces
+                              Agregar la tupla ("<BOOL>", pretoken) a tokens
+                         Sino si pretoken es "define" entonces
+                              Agregar la tupla ("<DEFINE>", pretoken) a tokens
+                         Sino si pretoken es "if" entonces
+                              Agregar la tupla ("<IF>", pretoken) a tokens
+                         Sino si pretoken es "set" entonces
+                              Agregar la tupla ("<SET>", pretoken) a tokens
+                         Sino si pretoken es "and" entonces
+                              Agregar la tupla ("<AND>", pretoken) a tokens
+                         Sino
+                              Agregar la tupla ("<ID>", pretoken) a tokens  
+                  Sino si string en i es digito entonces
+                        Mientras string en i+k sea digito hacer
+                              Agregar string en i+k a pretoken
+                              Sumar 1 a k
+                              Si i+k es igual a largo de string entonces
+                                    Agregar la tupla ("<NUM>", valor entero de pretoken) a tokens
+                        Si string en i+k no es " ", o ")" entonces
+                              Imprimir "ERROR: COMBINACIÓN DE ALFANUMÉRICOS"
+                              Salir del ciclo
+                        Sino 
+                              Agregar la tupla ("<NUM>", valor entero de pretoken) a tokens
+                  Sino si string en i es "<", ">" o "=" entonces
+                        Si i+1 es igual a largo de string entonces
+                              Agregar la tupla ("<OPREL>", string en i) a tokens
+                        Sino si string en i es "=" entonces
+                              Asignar 2 a k
+                              Agregar la tupla ("<OPREL>", string en i+1) a tokens
+                        Sino
+                              Asignar 1 a k
+                        Agregar la tupla ("<OPREL>", string en i) a tokens     
+                  Sino si string en i es "+", "*", o "^" entonces
+                        Asignar 1 a k
+                        Agregar la tupla ("<MAT>", string en i) a tokens
+                  Sino si string en i es "(" entonces
+                        Asignar 1 a k
+                        Agregar la tupla ("<(>", string en i) a tokens
+                  Sino si string en i es ")" entonces
+                        Asignar 1 a k
+                        Agregar la tupla ("<)>", string en i) a tokens
+                  Sino si string en i es "\\" entonces
+                        Si string en i+1 es igua la "n" entonces
+                              Asignar 2 a k
+                        Sino
+                              Imprimir "ERROR: CARACTERES NO RECONOCIDOS POR EL LENGUAJE"
+                              Salir del ciclo
+                  Sino si string en i es distinto de " " entonces
+                        Imprimir "ERROR: CARACTERES NO RECONOCIDOS POR EL LENGUAJE"
+                  Sino
+                        Asignar 1 a k
+                  Sumar k a i
+                  Asignar 0 a k
+                  Asignar "" a pretoken
+            Sino
+                  Imprimir tokens
+                  Regresar tokens
 
-Agregar " " a string
-Asignar 0 a i
-Asignar 0 a k
-Asignar " " a pretoken
-Asignar tokens=[]
-Asignar 0 a cIgualParentesis
-
-Mientras verdadero hacer:
-  Si i menor a largo de string entonces
-    Si string en i es '""' entonces
-      Mientras .
-        si i+k es igual a largo de string entonces
-          Imprimir "ERROR: FALTA CERRAR EL STRING"
-          Salir del ciclo
-        Agregar string en i+k a pretoken
-        Sumar 1 a k
-      Si string en i+k+1 no es " ", "(", ")", o "=" entonces
-        Imprimir "ERROR: CARACTERES LUEGO DEL STRING"
-        Salir del ciclo
-      Sino
-        Agregar "<STRING>" a tokens
-    Sino si string en i es alfa entonces
-      Mientras string en i+k sea alfa hacer
-        Agregar string en i+k a pretoken
-        Sumar 1 a k
-      Si string en i+k no es " ", "(", ")", "=", "<", o ">" entonces
-        Imprimir "ERROR: COMBINACIÓN DE ALFANUMÉRICOS"
-        Salir del ciclo
-      Sino
-        Si pretoken es "and", "or", o "not" entonces
-          Agregar "<OPLOG>" a tokens
-        Sino si pretoken es "true", o "false" entonces
-          Agregar "<BOOL>" a tokens
-        Sino si pretoken es "define" entonces
-          Agregar "<DEFINE>" a tokens
-        Sino si pretoken es "if" entonces
-          Agregar "<IF>" a tokens
-        Sino si pretoken es "set" entonces
-          Agregar "<SET>" a tokens
-        Sino agregar "<ID>" a tokens
-      
-    Sino si string en i es digito entonces
-      Mientras string en i+k sea digito hacer
-        Agregar string en i+k a pretoken
-        Sumar 1 a k
-      Si string en i+k no es  " ", "(", ")", "=", "<", ">", "+", "*", o "^" entonces
-        Imprimir "ERROR: COMBINACIÓN DE ALFANUMÉRICOS"
-        Salir del ciclo
-      Sino agregar "<NUM>" a tokens
-    
-    Sino si string en i es "<", ">" o "=" entonces
-      Si string en i+1 es "=" entonces
-        Asignar 2 a k
-      Sino
-        Asignar 1 a k
-      Agregar "<OPREL>" a tokens
-   
-    Sino si string en i es "+", "*", o "^" entonces
-      Asignar 1 a k
-      Agregar "<OPMAT>" a tokens
-   
-    Sino si string en i es "(" entonces
-      Asignar 1 a k
-      Sumar 1 a cIgualParentesis
-      Agregar "<(>" a tokens
-    
-    Sino si string en i es ")" entonces
-      Si cIgualParentesis es menor a 1 entonces
-       Imprimir "ERROR: DISCREPANCIA ENTRE PARÉNTESIS ABIERTOS Y CERRADOS"
-       Salir del ciclo
-      Sino
-        Asignar 1 a k
-        Restar 1 a cIgualParentesis
-        Agregar "<)>" a tokens
-      
-    Sino asignar 1 a k
-    Sumar k a i
-    Asignar 0 a k
-    Asignar "" a pretoken
-  Sino
-    Imprimir tokens
-    Salir del ciclo
-    
-    
