@@ -85,12 +85,8 @@ def lexer(string):
 				k = 1
 				tokens.append(( "<)>" , string[i] ))
 			#Newlines
-			elif string[i] == "\\":
-				if string[ i + 1 ] == "n":
-					k=2
-				else:
-					print("ERROR: CARACTERES NO RECONOCIDOS POR EL LENGUAJE")
-					break
+			elif string[i] == "\n":
+				k=2
  			#Caracteres desconocidos
 			elif string[i] != " ":
 				print("ERROR: CARACTERES NO RECONOCIDOS POR EL LENGUAJE")
