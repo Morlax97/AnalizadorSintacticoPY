@@ -72,12 +72,8 @@ Definir funcion lexer con string de entrada
                   Sino si string en i es ")" entonces
                         Asignar 1 a k
                         Agregar la tupla ("<)>", string en i) a tokens
-                  Sino si string en i es "\\" entonces
-                        Si string en i+1 es igua la "n" entonces
-                              Asignar 2 a k
-                        Sino
-                              Imprimir "ERROR: CARACTERES NO RECONOCIDOS POR EL LENGUAJE"
-                              Salir del ciclo
+                  Sino si string en i es "\n" entonces
+                        asignar 2 a k
                   Sino si string en i es distinto de " " entonces
                         Imprimir "ERROR: CARACTERES NO RECONOCIDOS POR EL LENGUAJE"
                   Sino
